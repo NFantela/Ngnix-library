@@ -1,27 +1,64 @@
 # NgnixApps
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
+## Lib setup process:
+<!-- library setup tips : https://www.youtube.com/watch?v=2vHJ3_Om_gU&t=546s&ab_channel=B%C3%A4rnerJSTalks --> 
+1) project:   ng new ngnix-apps --create-application=false
 
-## Development server
+2) inside project create lib project: ng g library ngnix-lib
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2.1) inside project create angular app showcase for created lib: ng g application ngnix-showcase
 
-## Code scaffolding
+3) build library using : ng build
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+4) Build and show showcase project: ng build --named-chunks --output-hashing=none --project ngnix-showcase
+-- this will only build and show modules
 
-## Build
+!! remember library is consumed from the dist !!
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Dangers of commonjs dependencies (e.g. momentjs)
+Ivy automatically optmizies not imported modules etc however if u use commonjs deps it will be included even
+if not used
 
-## Running unit tests
+Solution : SUBENTRIES:
+-- in every library module e.g. library-a ADD:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1) public-api.ts : exports module and component
+  export * from './library-a.module';
+  export * from './a/a.component';
 
-## Running end-to-end tests
+2) index.ts - always same just exports everything from its neighbhor public-api.ts
+export * from './public-api';
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3) package.json - always have same content
+{
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public-api.ts"
+    }
+  }
+}
 
-## Further help
+after that change root tsconfig.json paths:
+    "paths": {
+      "ngnix-lib/*": [
+        "projects/ngnix-lib/*",
+      ],
+      "ngnix-lib": [
+        "dist/ngnix-lib"
+      ]
+    },
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+and in library project edit public-apis to include our modules:
+
+now ng build builds multiple files for our library
+
+## Making stuff private
+-- dont export it from the top level public-api and u have to use deep imports inside others modules using it
+
+## DONT DO
+import modules with services / set up some processing  e.g. BrowserModule, TranslationModule... use that in 
+consuming app cuz it will be duplicated
+
+## DO
+Modules should only bring components  / directives / pipes for services modules are not needed
+

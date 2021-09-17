@@ -11,6 +11,14 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "paths": {
+      "ngnix-lib/*": [
+        "projects/ngnix-lib/*",
+      ],
+      "ngnix-lib": [
+        "dist/ngnix-lib"
+      ]
+    },
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
