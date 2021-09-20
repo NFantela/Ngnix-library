@@ -2,7 +2,7 @@ import { Directive, EventEmitter, HostBinding, Input, Output } from "@angular/co
 
 
 @Directive()
-export abstract class NgNxInteractiveEl {
+export abstract class NgNixInteractiveEl {
 
   abstract disabled: boolean;
 

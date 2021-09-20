@@ -1,0 +1,29 @@
+:host {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: top;
+  user-select: none;
+  text-decoration: none;
+  font-weight: bold;
+  outline: none;
+  font: var(--ngnx-font-text);
+  &[data-color='primary'] {
+    background-color: var(--ngnx-primary);
+    color: var(--ngnx-text-light);
+  }
+
+  &[data-color='secondary'] {
+    background-color: var(--ngnx-secondary);
+  }
+
+  &[data-color='danger'] {
+    background-color: var(--ngnx-danger);
+  }
+}
+
+.ngnx-button-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

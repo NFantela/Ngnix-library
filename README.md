@@ -62,3 +62,8 @@ consuming app cuz it will be duplicated
 ## DO
 Modules should only bring components  / directives / pipes for services modules are not needed
 
+### Note to self
+Initial vnedor.js (2.38 mb)
+styless.css, styles.js 328.87 kb
+main.js 11.68 kb
+
