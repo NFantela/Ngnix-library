@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, HostBinding, ElementRef, Inject, HostListener } from '@angular/core';
 import { NgNixInteractiveEl } from 'ngnix-lib/src/lib/cdk/abstract';
+import { IsHoveredService } from 'ngnix-lib/src/lib/cdk/services';
 import { isNativeFocused } from 'ngnix-lib/src/lib/cdk/utils';
 import { NgNixColor } from 'ngnix-lib/src/lib/core/enums';
 
@@ -13,7 +14,16 @@ import { NgNixColor } from 'ngnix-lib/src/lib/core/enums';
 export class NgNixButtonComponent extends NgNixInteractiveEl {
   constructor(
     @Inject(ElementRef) private readonly _elementRef: ElementRef<HTMLElement>,
-  ) { super(); }
+    private readonly _isHoveredService: IsHoveredService
+  ) {
+    super();
+    // _isHoveredService
+    //   .createHovered$(_elementRef.nativeElement)
+    //   .pipe(watch(changeDetectorRef), takeUntil(destroy$))
+    //   .subscribe(hovered => {
+    //     this.changeHovered(hovered);
+    //   });
+  }
 
   /** Focused & disabled are abstract so we implement them here */
   @Input()
