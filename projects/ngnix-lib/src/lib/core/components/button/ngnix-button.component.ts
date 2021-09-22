@@ -54,6 +54,7 @@ export class NgNixButtonComponent extends NgNixInteractiveEl {
     this.notifyFocusChange(focused);
   }
 
+  /** Abstract in base needs to be implemented here */
   get focused(): boolean {
     return isNativeFocused(this._elementRef.nativeElement);
   }

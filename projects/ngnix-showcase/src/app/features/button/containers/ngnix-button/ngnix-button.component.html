@@ -1,7 +1,9 @@
 <h3>All button types:</h3>
 <button
+    class="m-r-1"
     ngnix-button
-    *ngFor="let btnType of allButtonTypesByColor"
-    [color]="btnType">
+    *ngFor="let btnType of allButtonTypesByColor; index as i;"
+    [color]="btnType"
+    [disabled]="i === 0">
     {{btnType}}
 </button>

@@ -7,22 +7,22 @@
   text-decoration: none;
   font-weight: bold;
   outline: none;
-  font: var(--ngnx-font-text);
-  &[data-color='primary'] {
-    background-color: var(--ngnx-primary);
-    color: var(--ngnx-text-light);
+  color: var(--ngnix-font-text);
+  border: 0px;
+  padding: 0px;
+
+  &[disabled] {
+    pointer-events: none;
   }
 
-  &[data-color='secondary'] {
-    background-color: var(--ngnx-secondary);
-  }
-
-  &[data-color='danger'] {
-    background-color: var(--ngnx-danger);
+  &:hover:not(.disabled) {
+    cursor: pointer;
   }
 }
 
-.ngnx-button-content {
+.ngnix-button-content {
+  display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
   text-align: center;

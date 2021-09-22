@@ -1,5 +1,9 @@
-<ngnix-wrapper>
-  <span class="ngnix-button-content">
-    <ng-content></ng-content>
-  </span>
+<ngnix-wrapper
+    [hovered]="isHovered"
+    [pressed]="isPressed"
+    [disabled]="isDisabled"
+    [focused]="isFocused">
+    <span class="ngnix-button-content">
+        <ng-content></ng-content>
+    </span>
 </ngnix-wrapper>

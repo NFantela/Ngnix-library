@@ -62,6 +62,7 @@
               "projects/ngnix-showcase/src/assets"
             ],
             "styles": [
+              "projects/ngnix-lib/src/lib/core/styles/ngnix-global-styles.scss",
               "projects/ngnix-showcase/src/styles.scss"
             ],
             "scripts": []

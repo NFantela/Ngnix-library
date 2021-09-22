@@ -34,6 +34,16 @@ export abstract class NgNixInteractiveEl {
     return !this.isDisabled && this.focused;
   }
 
+  @HostBinding('class.pressed')
+  get isPressed(): boolean {
+    return !this.isDisabled && this.pressed;
+  }
+
+  @HostBinding('class.hovered')
+  get isHovered(): boolean {
+    return !this.isDisabled && this.hovered;
+  }
+
   get isFocusable(): boolean {
     return !this.isDisabled && (this.canFocus || this.focused);
   }
