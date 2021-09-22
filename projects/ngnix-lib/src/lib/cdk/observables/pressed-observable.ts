@@ -4,7 +4,7 @@ import { mouseDragFinish } from './mouse-drag-finish';
 
 
 /** This one will emit only if mouse down and mouseup | dragend finished on the same target */
-export function pressedObservable(element: Element): Observable<boolean> {
+export function pressedStream(element: Element): Observable<boolean> {
   const { ownerDocument } = element;
 
   if (!ownerDocument) {

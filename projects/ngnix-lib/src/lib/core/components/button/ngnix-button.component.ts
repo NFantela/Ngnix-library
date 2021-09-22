@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, HostBinding, ElementRef, Inject, HostListener, ChangeDetectorRef } from '@angular/core';
 import { NgNixInteractiveEl } from 'ngnix-lib/src/lib/cdk/abstract';
-import { watchAndCheck } from 'ngnix-lib/src/lib/cdk/observables';
+import { pressedStream, watchAndCheck } from 'ngnix-lib/src/lib/cdk/observables';
 import { IsHoveredService, UnsubscribeService } from 'ngnix-lib/src/lib/cdk/services';
 import { isNativeFocused } from 'ngnix-lib/src/lib/cdk/utils';
 import { NgNixColor } from 'ngnix-lib/src/lib/core/enums';
@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
   providers: [UnsubscribeService]
 })
 export class NgNixButtonComponent extends NgNixInteractiveEl {
+
   constructor(
     @Inject(ElementRef) private readonly _elementRef: ElementRef<HTMLElement>,
     private readonly _isHoveredService: IsHoveredService,
@@ -29,6 +30,12 @@ export class NgNixButtonComponent extends NgNixInteractiveEl {
         watchAndCheck(_changeDetRef), takeUntil(_unsubscribeService$))
       .subscribe(hovered => {
         this.changeHovered(hovered);
+      });
+
+    pressedStream(_elementRef.nativeElement)
+      .pipe(watchAndCheck(_changeDetRef), takeUntil(_unsubscribeService$))
+      .subscribe(pressed => {
+        this.changePressed(pressed);
       });
   }
 

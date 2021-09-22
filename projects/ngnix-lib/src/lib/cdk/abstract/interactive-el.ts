@@ -10,6 +10,8 @@ export abstract class NgNixInteractiveEl {
 
   hovered = false;
 
+  pressed = false;
+
   @Input()
   canFocus = true;
 
@@ -18,6 +20,9 @@ export abstract class NgNixInteractiveEl {
 
   @Output()
   readonly hoveredChange = new EventEmitter<boolean>();
+
+  @Output()
+  readonly pressedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.disabled')
   get isDisabled(): boolean {
@@ -44,5 +49,13 @@ export abstract class NgNixInteractiveEl {
 
     this.hovered = hovered;
     this.hoveredChange.emit(hovered);
+  }
+
+  protected changePressed(pressed: boolean) {
+    if (this.pressed === pressed) {
+      return;
+    }
+    this.pressed = pressed;
+    this.pressedChange.emit(pressed);
   }
 }
