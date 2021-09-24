@@ -18,6 +18,20 @@
   &:hover:not(.disabled) {
     cursor: pointer;
   }
+  &[data-color="primary"]{
+    background-color: var(--ngnix-primary);
+    color: var(--ngnix-text-primary-invert);
+    }
+
+    &[data-color="secondary"] {
+      background-color: var(--ngnix-secondary);
+      color: var(--ngnix-text-secondary-invert);
+    }
+
+    &[data-color="danger"] {
+      background-color: var(--ngnix-danger);
+      color: var(--ngnix-text-danger-invert);
+    }
 }
 
 .ngnix-button-content {
