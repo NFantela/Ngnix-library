@@ -1,4 +1,4 @@
-import { DEFAULT_ICON_PATH } from "../constants";
+import { DEFAULT_ICON_PATH } from "ngnix-lib/src/lib/core/constants";
 
 export function iconPathFactory(staticPath: string): (val: string) => string {
   // append / in the end

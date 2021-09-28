@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { iconPathFactory } from '../misc';
+import { iconPathFactory } from 'ngnix-lib/src/lib/core/misc';
 
 
 export const TUI_ICONS_PATH: InjectionToken<
