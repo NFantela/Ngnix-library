@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgNixSvgComponent } from '.';
+import { NgNixSvgComponent } from './ngnix-svg.component';
 
 @NgModule({
   imports: [],
