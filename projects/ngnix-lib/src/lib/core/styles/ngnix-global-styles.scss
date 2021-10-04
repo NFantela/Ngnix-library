@@ -1,14 +1,103 @@
+@import './mixins/color-themes.scss';
+
+// }
+
+// color scheme
+* {
+  // must use brand color as hsl() hue, saturation, lightness
+  // e.g. we use hsl(200 100% 50%); separated everything in its own value
+  // so we can use calc(var(--brand-lightness) - 20%)
+  --brand-hue: 200;
+  --brand-saturation: 100%;
+  --brand-lightness: 50%;
+
+  // calculate brand from the above values
+  --brand-light: hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness));
+
+  // in a light theme the text is dark so lightness should be below 50% the greater % the lighter the color
+  --text1-light: hsl(var(--brand-hue) var(--brand-saturation) 10%);
+  --text2-light: hsl(var(--brand-hue) 30% 30%);
+
+  // declare surface colors (backgrounds, borders...)
+  // for light theme we reduce the saturation and increase lightness
+  --surface1-light: hsl(var(--brand-hue) 25% 90%);
+  --surface2-light: hsl(var(--brand-hue) 20% 99%);
+  --surface3-light: hsl(var(--brand-hue) 20% 92%);
+  --surface4-light: hsl(var(--brand-hue) 20% 85%);
+
+  // define shadows reducing saturation and lightness
+  --surface-shadow-light: var(--brand-hue) 10% 20%;
+  --shadow-strength-light: .02;
+
+  /** DARK THEME DEFINITION **/
+
+  // for dark theme the saturation is cut in half and the lightness reduced a relative 50%.
+  --brand-dark: hsl(var(--brand-hue) calc(var(--brand-saturation) / 2) calc(var(--brand-lightness) / 1.5));
+
+  // dark theme text should be ligth so we increase lightness
+  --text1-dark: hsl(var(--brand-hue) 15% 85%);
+  --text2-dark: hsl(var(--brand-hue) 5% 65%);
+
+  // declare surface colors (backgrounds, borders...)
+  --surface1-dark: hsl(var(--brand-hue) 10% 10%);
+  --surface2-dark: hsl(var(--brand-hue) 10% 15%);
+  --surface3-dark: hsl(var(--brand-hue) 5% 20%);
+  --surface4-dark: hsl(var(--brand-hue) 5% 25%);
+
+  // shadows
+  --surface-shadow-dark: var(--brand-hue) 50% 3%;
+  --shadow-strength-dark: .8;
+
+  /** DIM (custom) theme definition **/
+
+  // brand
+  --brand-dim: hsl(var(--brand-hue) calc(var(--brand-saturation) / 1.25) calc(var(--brand-lightness) / 1.25));
+
+  --text1-dim: hsl(var(--brand-hue) 15% 75%);
+  --text2-dim: hsl(var(--brand-hue) 10% 61%);
+
+  --surface1-dim: hsl(var(--brand-hue) 10% 20%);
+  --surface2-dim: hsl(var(--brand-hue) 10% 25%);
+  --surface3-dim: hsl(var(--brand-hue) 5% 30%);
+  --surface4-dim: hsl(var(--brand-hue) 5% 35%);
+
+  --surface-shadow-dim: var(--brand-hue) 30% 13%;
+  --shadow-strength-dim: .2;
+
+}
+
+// using defined colors
+
+/** Set defaults **/
 :root {
-  --ngnix-font-text: gray;
-  --ngnix-primary: rgba(141, 13, 141, 1);
-  --ngnix-primary-hover: rgba(141, 13, 141, .7);
-  --ngnix-primary-active: rgba(192, 46, 192, 1);
-  --ngnix-secondary: rgba(32, 178, 170, 1);
-  --ngnix-secondary-hover: rgba(32, 178, 170, .7);
-  --ngnix-secondary-active: rgb(66, 209, 202);
-  --ngnix-danger: red;
-  --ngnix-disabled-bckgd: rgb(94, 94, 94);
-  --ngnix-text-primary-invert: white;
-  --ngnix-text-secondary-invert: white;
-  --ngnix-text-danger-invert: white;
+  @include ngNixLightTheme();
+}
+
+// if media query dark
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include ngNixDarkTheme();
+  }
+}
+
+[color-scheme="light"] {
+  @include ngNixLightTheme();
+}
+
+[color-scheme="dark"] {
+  @include ngNixDarkTheme();
+}
+
+[color-scheme="dim"] {
+  color-scheme: dark;
+
+  --brand: var(--brand-dim);
+  --text1: var(--text1-dim);
+  --text2: var(--text2-dim);
+  --surface1: var(--surface1-dim);
+  --surface2: var(--surface2-dim);
+  --surface3: var(--surface3-dim);
+  --surface4: var(--surface4-dim);
+  --surface-shadow: var(--surface-shadow-dim);
+  --shadow-strength: var(--shadow-strength-dim);
 }
